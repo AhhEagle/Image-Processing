@@ -1,9 +1,9 @@
 import express from "express";
 import { imageReducer } from "./controller";
-const app: express.Application = express();
+
+export const app: express.Application = express();
 
 const PORT: number = 3000;
-
 
 app.get("/api/images", imageReducer);
 

@@ -12,17 +12,17 @@ export const imageReducer = (req : Request, res: Response) => {
       const width: any = req.query["width"];
       const height: any = req.query["height"];
       const name = filename.split(".")[0];
-      const extension = filename.split(".")[1];
+      const extension = "jpg";
       fs.stat(
-        `${thumbFolder}/${name}_${width}_${height}.${extension}`,
+       `${thumbFolder}/${name}_${width}_${height}.${extension}`,
         (err, stats) => {
+          console.log(err);
           if (!err) {
             const readStream = fs.createReadStream(
               `${thumbFolder}/${name}_${width}_${height}.${extension}`,
               { flags: "r+" }
             );
             readStream.pipe(res);
-  
             return;
           }
   
@@ -31,7 +31,7 @@ export const imageReducer = (req : Request, res: Response) => {
               fs.mkdirSync(thumbFolder);
             }
             const readFileStream = fs.createReadStream(
-              `${imagesFolder}/${filename}`
+              `${imagesFolder}/${filename}.jpg`
             );
             readFileStream.on("error", (err: Error) => {
               return res.status(500).send({

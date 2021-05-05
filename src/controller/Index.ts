@@ -8,6 +8,7 @@ const imagesFolder = "images";
 
 export const imageReducer = (req: Request, res: Response) => {
   try {
+    //get filename, width and height from the query 
     const filename: any = req.query["filename"];
     const width: any = req.query["width"];
     const height: any = req.query["height"];
@@ -25,9 +26,12 @@ export const imageReducer = (req: Request, res: Response) => {
       }
 
       if ((err.code = "ENONT")) {
+        //check if folder exists otherwise create folder
         if (!fs.existsSync(thumbFolder)) {
           fs.mkdirSync(thumbFolder);
         }
+        
+        //get the file from the image to process
         const readFileStream = fs.createReadStream(
           `${imagesFolder}/${filename}.jpg`
         );
@@ -36,6 +40,7 @@ export const imageReducer = (req: Request, res: Response) => {
             message: err.message
           });
         });
+        //using sharp to resize image to the given width and height
         const transform = imageResizer(width, height);
         const cacheFileStream = fs.createWriteStream(
           `${thumbFolder}/${name}_${width}_${height}.${extension}`,

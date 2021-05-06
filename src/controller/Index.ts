@@ -8,17 +8,19 @@ const imagesFolder = "images";
 
 export const imageReducer = (req: Request, res: Response) => {
   try {
-    if(!req.query["width"] || !req.query.height || !req.query.filename){
-      res.send("Image name, width and height to be resized to needs to be provided");
+    if (!req.query["width"] || !req.query.height || !req.query.filename) {
+      res.send(
+        "Image name, width and height to be resized to needs to be provided"
+      );
       return;
     }
-    //get filename, width and height from the query 
+    //get filename, width and height from the query
     const filename: any = req.query["filename"];
     const width: any = req.query["width"];
     const height: any = req.query["height"];
     const name = filename.split(".")[0];
     const extension = "jpg";
-  
+
     fs.stat(`${thumbFolder}/${name}_${width}_${height}.${extension}`, (err) => {
       if (!err) {
         const readStream = fs.createReadStream(
@@ -34,7 +36,7 @@ export const imageReducer = (req: Request, res: Response) => {
         if (!fs.existsSync(thumbFolder)) {
           fs.mkdirSync(thumbFolder);
         }
-        
+
         //get the file from the image to process
         const readFileStream = fs.createReadStream(
           `${imagesFolder}/${filename}.jpg`

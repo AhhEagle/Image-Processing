@@ -8,14 +8,18 @@ const imagesFolder = "images";
 
 export const imageReducer = (req: Request, res: Response) => {
   try {
+    if(!req.query["width"] || !req.query.height || !req.query.filename){
+      res.send("Image name, width and height to be resized to needs to be provided");
+      return;
+    }
     //get filename, width and height from the query 
     const filename: any = req.query["filename"];
     const width: any = req.query["width"];
     const height: any = req.query["height"];
     const name = filename.split(".")[0];
     const extension = "jpg";
+  
     fs.stat(`${thumbFolder}/${name}_${width}_${height}.${extension}`, (err) => {
-      console.log(err);
       if (!err) {
         const readStream = fs.createReadStream(
           `${thumbFolder}/${name}_${width}_${height}.${extension}`,
@@ -41,7 +45,6 @@ export const imageReducer = (req: Request, res: Response) => {
           });
         });
         //using sharp to resize image to the given width and height
-       
         const transform = imageResizer(width, height);
         const cacheFileStream = fs.createWriteStream(
           `${thumbFolder}/${name}_${width}_${height}.${extension}`,

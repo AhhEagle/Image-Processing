@@ -10,6 +10,10 @@ var thumbFolder = "thumb";
 var imagesFolder = "images";
 var imageReducer = function (req, res) {
     try {
+        if (!req.query["width"] || !req.query.height || !req.query.filename) {
+            res.send("Image name, width and height to be resized to needs to be provided");
+            return;
+        }
         //get filename, width and height from the query 
         var filename_1 = req.query["filename"];
         var width_1 = req.query["width"];
@@ -17,7 +21,6 @@ var imageReducer = function (req, res) {
         var name_1 = filename_1.split(".")[0];
         var extension_1 = "jpg";
         fs_1.default.stat(thumbFolder + "/" + name_1 + "_" + width_1 + "_" + height_1 + "." + extension_1, function (err) {
-            console.log(err);
             if (!err) {
                 var readStream = fs_1.default.createReadStream(thumbFolder + "/" + name_1 + "_" + width_1 + "_" + height_1 + "." + extension_1, { flags: "r+" });
                 readStream.pipe(res);

@@ -12,10 +12,9 @@ describe("response on calling endpoint", () => {
 
   it("should return status 500", async () => {
     const response = await req.get("/api/images").send();
-    console.log(response);
     expect(response.status).toBe(500);
     expect(response.text).toBe(
-      'Image name, width and height to be resized to needs to be provided'
+      "Image name, width and height to be resized to needs to be provided"
     );
   });
 });

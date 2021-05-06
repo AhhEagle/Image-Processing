@@ -7,19 +7,25 @@ const thumbFolder = "thumb";
 const imagesFolder = "images";
 
 export const imageReducer = (req: Request, res: Response) => {
+  //get filename, width and height from the query
+  const filename: any = req.query["filename"];
+  const width: any = req.query["width"];
+  const height: any = req.query["height"];
+  const name = filename.split(".")[0];
+  const extension = "jpg";
   try {
-    if (!req.query["width"] || !req.query.height || !req.query.filename) {
-      res.status(500).send(
-        "Image name, width and height to be resized to needs to be provided"
-      );
+    if (!req.query["width"] || !req.query.height || !req.query.filename ) {
+      res
+        .status(500)
+        .send(
+          "Image name, width and height to be resized to needs to be provided"
+        );
       return;
+    } else if(!fs.existsSync(`${imagesFolder}/${filename}.jpg`)){
+        res.status(500).send("The image specified doesn't exist in the image folder");
+        return ;
     }
-    //get filename, width and height from the query
-    const filename: any = req.query["filename"];
-    const width: any = req.query["width"];
-    const height: any = req.query["height"];
-    const name = filename.split(".")[0];
-    const extension = "jpg";
+    
 
     fs.stat(`${thumbFolder}/${name}_${width}_${height}.${extension}`, (err) => {
       if (!err) {
@@ -28,6 +34,7 @@ export const imageReducer = (req: Request, res: Response) => {
           { flags: "r+" }
         );
         readStream.pipe(res);
+        console.log(readStream.pipe);
         return;
       }
 

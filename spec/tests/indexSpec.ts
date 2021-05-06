@@ -10,12 +10,12 @@ describe("response on calling endpoint", () => {
     expect(response.status).toBe(200);
   });
 
-  it("should return status 200", async () => {
+  it("should return status 500", async () => {
     const response = await req.get("/api/images").send();
+    console.log(response);
     expect(response.status).toBe(500);
     expect(response.text).toBe(
-      '{"message":"File name and reduction sizes must be provided","err":{}}'
+      'Image name, width and height to be resized to needs to be provided'
     );
   });
-
 });

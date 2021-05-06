@@ -9,7 +9,7 @@ const imagesFolder = "images";
 export const imageReducer = (req: Request, res: Response) => {
   try {
     if (!req.query["width"] || !req.query.height || !req.query.filename) {
-      res.send(
+      res.status(500).send(
         "Image name, width and height to be resized to needs to be provided"
       );
       return;

@@ -8,5 +8,5 @@ const PORT: number = 3000;
 app.get("/api/images", imageReducer);
 
 app.listen(PORT, () => {
-  console.log(`Server is listeneing on Port: ${PORT}`);
+  console.log(`Server is listening on Port: ${PORT}`);
 });

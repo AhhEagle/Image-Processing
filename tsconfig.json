@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "rootDir": "./",
+    "target": "es5",
+    "lib": ["es6"],
+    "module": "CommonJS",
+    "rootDir": "./src",
     "outDir": "./build",
-    "typeRoots": ["./types", "./node_modules/@types"],
+    "noImplicitAny": true,
     "esModuleInterop": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "strictNullChecks": false
-  }
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+  },
+  "include": ["./src"],
+  "exclude": ["node_modules"]
 }

@@ -7,7 +7,7 @@ const check = new ImageReduction();
 const filename = "fjord";
 const width = 200;
 const height = 200;
-const image =  "images";
+const image = "images";
 const thumbFolder = "thumb";
 
 describe("response on calling endpoint", () => {
@@ -26,12 +26,15 @@ describe("response on calling endpoint", () => {
     );
   });
 
-  it("should check if image exist in the image folder", async()=>{
-        expect(await check.imageExist(filename, width, height)).toBe(`${image}/${filename}.jpg`);
+  it("should check if image exist in the image folder", async () => {
+    expect(await check.imageExist(filename, width, height)).toBe(
+      `${image}/${filename}.jpg`
+    );
   });
 
-  it("should check if the image was reduced to specified width and height", async()=>{
-        expect(await check.reducedImageExist(filename, width, height)).toEqual(`${thumbFolder}/${filename}_${width}_${height}.jpg`);
-  })
-
+  it("should check if the image was reduced to specified width and height", async () => {
+    expect(await check.reducedImageExist(filename, width, height)).toEqual(
+      `${thumbFolder}/${filename}_${width}_${height}.jpg`
+    );
+  });
 });

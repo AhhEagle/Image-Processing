@@ -1,8 +1,7 @@
 import express from "express";
-import { ImageReduction} from "./controller";
+import { ImageReduction } from "./controller";
 
-
-const imageReducer = new ImageReduction()
+const imageReducer = new ImageReduction();
 
 export const app: express.Application = express();
 

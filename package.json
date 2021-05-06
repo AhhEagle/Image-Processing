@@ -8,7 +8,7 @@
     "build": "tsc --project ./",
     "jasmine": "jasmine",
     "start": "npm run build && NODE_ENV=PRODUCTION node ./build/index.js",
-    "lint": "eslint . --ext .ts ",
+    "lint": "eslint . --ext .ts --fix",
     "test": "jasmine-ts"
   },
   "repository": {

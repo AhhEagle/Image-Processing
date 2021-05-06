@@ -41,6 +41,7 @@ export const imageReducer = (req: Request, res: Response) => {
           });
         });
         //using sharp to resize image to the given width and height
+       
         const transform = imageResizer(width, height);
         const cacheFileStream = fs.createWriteStream(
           `${thumbFolder}/${name}_${width}_${height}.${extension}`,

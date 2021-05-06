@@ -1,6 +1,14 @@
 import { app } from "../../src/index";
 import request from "supertest";
+import { ImageReduction } from "../../src/controller";
 const req = request(app);
+
+const check = new ImageReduction();
+const filename = "fjord";
+const width = 200;
+const height = 200;
+const image =  "images";
+const thumbFolder = "thumb";
 
 describe("response on calling endpoint", () => {
   it("should return status 200", async () => {
@@ -17,4 +25,13 @@ describe("response on calling endpoint", () => {
       "Image name, width and height to be resized to needs to be provided"
     );
   });
+
+  it("should check if image exist in the image folder", async()=>{
+        expect(await check.imageExist(filename, width, height)).toBe(`${image}/${filename}.jpg`);
+  });
+
+  it("should check if the image was reduced to specified width and height", async()=>{
+        expect(await check.reducedImageExist(filename, width, height)).toEqual(`${thumbFolder}/${filename}_${width}_${height}.jpg`);
+  })
+
 });

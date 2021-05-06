@@ -18,7 +18,7 @@ The resized image can be found in the thumb folder.
  
      
  ### Testing
- To test run `npm run test`. To also check for linting run `npm run lint`
+ To test run `npm run test`. To also check for linting run `npm run lint`. Prittier was extendend in the lint configuration file.
 
 
 

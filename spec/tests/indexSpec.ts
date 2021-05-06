@@ -27,9 +27,7 @@ describe("response on calling endpoint", () => {
   });
 
   it("should check if image exist in the image folder", async () => {
-    expect(await check.imageExist(filename, width, height)).toBe(
-      `${image}/${filename}.jpg`
-    );
+    expect(await check.imageExist(filename)).toBe(`${image}/${filename}.jpg`);
   });
 
   it("should check if the image was reduced to specified width and height", async () => {

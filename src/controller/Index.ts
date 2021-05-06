@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import fs, { promises as fsPromises } from "fs";
 import { imageResizer } from "../utils/imageResizer";
-import { log } from "util";
 
 const thumbFolder = "thumb";
 
@@ -84,7 +83,7 @@ export class ImageReduction {
     }
   }
 
-  async imageExist(filename: string, width: number, height: number) {
+  async imageExist(filename: string) {
     if (fs.existsSync(`${imagesFolder}/${filename}.jpg`)) {
       return `${imagesFolder}/${filename}.jpg`;
     }
